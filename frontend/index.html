@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="가용시간을 기준으로 대학생 오프라인 스터디를 찾는 서비스"
+    />
+    <title>스터디 탐색</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#" aria-label="스터디 탐색 홈">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>스터디 모집</span>
+        </a>
+
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <a class="is-active" href="#study-list">스터디 탐색</a>
+          <a href="#create">스터디 개설</a>
+          <a href="#tools">AI 학습 도구</a>
+          <a href="#stats">모집 통계</a>
+        </nav>
+
+        <div class="account-actions">
+          <button class="button button-ghost" type="button">로그인</button>
+          <button class="button button-dark" type="button">회원가입</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-content">
+          <p class="eyebrow">AVAILABLE TIME · OFFLINE STUDY</p>
+          <h1 id="page-title">내 시간에 맞는 스터디를<br />한눈에 찾아보세요.</h1>
+          <p class="hero-description">
+            과목과 날짜, 참여 가능한 시간을 입력하면 조건에 맞는 오프라인
+            스터디만 모아 보여드립니다.
+          </p>
+        </div>
+        <div class="hero-stat" aria-label="현재 모집 현황">
+          <span>현재 모집 중</span>
+          <strong id="hero-count">0</strong>
+          <span>개의 스터디</span>
+        </div>
+      </section>
+
+      <section class="search-section" aria-labelledby="search-title">
+        <form class="search-panel" id="search-form">
+          <div class="search-heading">
+            <div>
+              <p class="section-kicker">조건 검색</p>
+              <h2 id="search-title">참여 가능한 시간을 알려주세요</h2>
+            </div>
+            <button class="reset-button" id="reset-button" type="reset">
+              조건 초기화
+            </button>
+          </div>
+
+          <div class="search-grid">
+            <label class="field field-wide">
+              <span>스터디명</span>
+              <input
+                id="title-filter"
+                name="title"
+                type="search"
+                placeholder="찾고 싶은 스터디명"
+              />
+            </label>
+
+            <label class="field">
+              <span>과목</span>
+              <select id="subject-filter" name="subject">
+                <option value="">전체 과목</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>날짜</span>
+              <input id="date-filter" name="date" type="date" />
+            </label>
+
+            <label class="field">
+              <span>시작 가능 시간</span>
+              <input id="start-filter" name="startTime" type="time" />
+            </label>
+
+            <label class="field">
+              <span>종료 가능 시간</span>
+              <input id="end-filter" name="endTime" type="time" />
+            </label>
+          </div>
+
+          <div class="search-footer">
+            <label class="saved-time-toggle">
+              <input id="availability-filter" type="checkbox" />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <span>
+                <strong>저장된 가용시간 적용</strong>
+                <small>마이페이지에 저장한 시간과 완전히 겹치는 스터디만 표시</small>
+              </span>
+            </label>
+            <button class="button button-primary search-button" type="submit">
+              스터디 검색
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="study-section" id="study-list" aria-labelledby="study-list-title">
+        <div class="list-heading">
+          <div>
+            <p class="section-kicker">모집 중인 스터디</p>
+            <h2 id="study-list-title">지금 참여할 수 있어요</h2>
+          </div>
+          <div class="list-tools">
+            <p class="result-count"><strong id="result-count">0</strong>개의 결과</p>
+            <div class="view-switcher" role="group" aria-label="스터디 목록 표시 방식">
+              <button
+                class="view-button is-active"
+                id="grid-view-button"
+                type="button"
+                aria-label="카드 보기"
+                aria-pressed="true"
+                title="카드 보기"
+              >
+                <span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </button>
+              <button
+                class="view-button"
+                id="list-view-button"
+                type="button"
+                aria-label="목록 보기"
+                aria-pressed="false"
+                title="목록 보기"
+              >
+                <span class="list-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
+        <div class="study-grid" id="study-grid" aria-live="polite"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <span class="empty-icon" aria-hidden="true">⌕</span>
+          <h3>조건에 맞는 스터디가 없습니다</h3>
+          <p>시간 범위를 넓히거나 다른 과목으로 다시 검색해 보세요.</p>
+          <button class="button button-secondary" id="empty-reset-button" type="button">
+            모든 조건 지우기
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="study-dialog" id="study-dialog">
+      <div class="dialog-content">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="닫기">×</button>
+        <div id="dialog-body"></div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script defer src="./js/app.js"></script>
+  </body>
+</html>
