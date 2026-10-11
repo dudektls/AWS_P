@@ -125,11 +125,15 @@ button {
 
 .button {
   min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 18px;
   border: 1px solid transparent;
   border-radius: 11px;
   font-size: 14px;
   font-weight: 750;
+  text-decoration: none;
   transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
 }
 
@@ -778,157 +782,6 @@ button {
   box-shadow: var(--shadow);
   font-size: 14px;
   font-weight: 650;
-}
-
-@media (max-width: 1000px) {
-  .main-nav {
-    display: none;
-  }
-
-  .account-actions {
-    margin-left: auto;
-  }
-
-  .search-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .field-wide {
-    grid-column: span 2;
-  }
-
-  .study-grid.list-view .study-card {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .study-grid.list-view .study-meta {
-    padding-right: 0;
-    border-right: 0;
-  }
-
-  .study-grid.list-view .card-footer {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 720px) {
-  .header-inner,
-  .search-section,
-  .study-section {
-    width: min(100% - 28px, 1180px);
-  }
-
-  .header-inner {
-    min-height: 66px;
-  }
-
-  .account-actions .button-ghost {
-    display: none;
-  }
-
-  .hero {
-    min-height: 390px;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    padding: 56px 22px 78px;
-  }
-
-  .hero-stat {
-    width: 100%;
-  }
-
-  .search-panel {
-    padding: 24px 20px;
-  }
-
-  .search-heading,
-  .search-footer {
-    align-items: flex-start;
-  }
-
-  .search-grid,
-  .study-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .field-wide {
-    grid-column: auto;
-  }
-
-  .search-footer {
-    flex-direction: column;
-  }
-
-  .search-button {
-    width: 100%;
-  }
-
-  .study-section {
-    padding-top: 48px;
-  }
-
-  .study-card {
-    padding: 22px;
-  }
-
-  .study-grid.list-view .study-card {
-    display: block;
-    padding: 22px;
-  }
-
-  .study-grid.list-view .card-top {
-    position: static;
-  }
-
-  .study-grid.list-view .study-card h3 {
-    margin-top: 20px;
-  }
-
-  .study-grid.list-view .study-meta {
-    margin: 22px 0;
-    padding: 18px 0;
-    border-top: 1px solid #eee7df;
-    border-bottom: 1px solid #eee7df;
-    border-left: 0;
-  }
-
-  .dialog-content {
-    padding: 26px 22px;
-  }
-}
-
-@media (max-width: 460px) {
-  .brand span:last-child {
-    display: none;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .search-heading h2,
-  .list-heading h2 {
-    font-size: 21px;
-  }
-
-  .list-heading {
-    align-items: flex-end;
-  }
-
-  .list-tools {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
-
-  .saved-time-toggle small {
-    display: none;
-  }
-
-  .card-footer {
-    align-items: flex-end;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
