@@ -1,0 +1,448 @@
+.timetable-shell {
+  width: min(1440px, calc(100% - 40px));
+}
+
+.timetable-workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.48fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.image-upload-panel,
+.course-editor-panel {
+  min-height: 670px;
+}
+
+.image-drop-zone {
+  min-height: 190px;
+}
+
+.image-file-card {
+  display: flex;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid #e1e6f0;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.image-file-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.image-file-meta strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-file-meta span {
+  color: #68728a;
+  font-size: 0.85rem;
+}
+
+.image-preview {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  margin-top: 16px;
+  border: 1px solid #dfe4ee;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #fafbfc;
+}
+
+.editor-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.course-table-wrap {
+  max-height: 490px;
+  overflow: auto;
+  border: 1px solid #e1e6f0;
+  border-radius: 12px;
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
+}
+
+.course-table th,
+.course-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #edf0f6;
+  text-align: left;
+  vertical-align: top;
+}
+
+.course-table th {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  color: #566078;
+  background: #f7f8fb;
+  font-size: 0.78rem;
+}
+
+.course-table tr.needs-review {
+  background: #fff9eb;
+}
+
+.course-table tr.has-error {
+  background: #fff1f2;
+}
+
+.course-table input,
+.course-table select,
+.availability-panel input,
+.availability-panel select {
+  width: 100%;
+  min-width: 76px;
+  padding: 8px;
+  border: 1px solid #d9deea;
+  border-radius: 8px;
+  color: #202a40;
+  background: #fff;
+}
+
+.course-table input[name="name"] {
+  min-width: 130px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.small-button {
+  padding: 7px 9px;
+  border: 1px solid #d9deea;
+  border-radius: 8px;
+  color: #34405c;
+  background: #fff;
+  white-space: nowrap;
+}
+
+.small-button.danger {
+  color: #b4233b;
+}
+
+.review-reason {
+  display: block;
+  margin-top: 5px;
+  color: #9a6700;
+  font-size: 0.72rem;
+}
+
+.warning-list {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border: 1px solid #f0d28b;
+  border-radius: 10px;
+  color: #76520a;
+  background: #fff9e8;
+  font-size: 0.86rem;
+}
+
+.warning-list ul {
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+.empty-state {
+  padding: 52px 20px;
+  border: 1px dashed #d9deea;
+  border-radius: 12px;
+  color: #7a8499;
+  text-align: center;
+  background: #fafbfc;
+}
+
+.editor-message {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: #b4233b;
+  font-size: 0.86rem;
+}
+
+.save-row {
+  display: flex;
+  margin-top: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.save-row p {
+  margin: 0;
+  color: #68728a;
+  font-size: 0.84rem;
+}
+
+.compact-button {
+  width: auto;
+  min-width: 150px;
+}
+
+.timetable-panel,
+.availability-panel {
+  margin-top: 22px;
+}
+
+.visual-timetable {
+  --hour-height: 72px;
+  display: grid;
+  min-width: 820px;
+  grid-template-columns: 104px repeat(5, minmax(135px, 1fr));
+  position: relative;
+}
+
+.timetable-scroll {
+  overflow-x: auto;
+}
+
+.time-corner,
+.day-header {
+  position: sticky;
+  z-index: 4;
+  top: 0;
+  height: 46px;
+  padding: 13px 8px;
+  border-bottom: 1px solid #dfe4ee;
+  background: #f7f8fb;
+  font-weight: 800;
+  text-align: center;
+}
+
+.time-column,
+.day-column {
+  position: relative;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--hour-height) - 1px),
+    #e8ebf2 calc(var(--hour-height) - 1px),
+    #e8ebf2 var(--hour-height)
+  );
+}
+
+.time-column {
+  border-right: 1px solid #dfe4ee;
+  overflow: hidden;
+}
+
+.day-column {
+  border-right: 1px solid #edf0f6;
+}
+
+.time-label {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  padding: 0 12px;
+  color: #53617e;
+  background: #fff;
+  font-size: 0.95rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.time-label.is-first {
+  top: 8px !important;
+  transform: none;
+}
+
+.time-label.is-last {
+  top: auto !important;
+  bottom: 8px;
+  transform: none;
+}
+
+.course-event {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  padding: 7px 8px;
+  border-left: 4px solid rgb(0 0 0 / 18%);
+  border-radius: 8px;
+  color: #172033;
+  font-size: 0.74rem;
+  box-shadow: 0 3px 9px rgb(31 42 72 / 10%);
+}
+
+.course-event strong,
+.course-event span {
+  display: block;
+}
+
+.course-event span {
+  margin-top: 3px;
+  opacity: 0.78;
+}
+
+.course-event.conflict {
+  outline: 2px solid #dc3545;
+  outline-offset: -2px;
+}
+
+.unplaced-courses {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #76520a;
+  background: #fff9e8;
+}
+
+.availability-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.availability-layout h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.study-window-list,
+.personal-event-list {
+  display: grid;
+  gap: 8px;
+}
+
+.study-window-row,
+.personal-event-row {
+  display: grid;
+  padding: 10px;
+  border: 1px solid #e1e6f0;
+  border-radius: 10px;
+  align-items: center;
+  gap: 8px;
+  background: #fafbfc;
+}
+
+.study-window-row {
+  grid-template-columns: 70px 1fr 20px 1fr;
+}
+
+.study-window-row label {
+  font-weight: 750;
+}
+
+.personal-event-row {
+  grid-template-columns: 1.2fr 0.8fr 1fr 20px 1fr auto;
+}
+
+.availability-actions {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  gap: 16px;
+}
+
+#availabilityMessage {
+  color: #5267d8;
+  font-weight: 700;
+}
+
+.availability-results {
+  display: grid;
+  margin-top: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.availability-day {
+  padding: 12px;
+  border: 1px solid #dfe4ee;
+  border-radius: 10px;
+  background: #f8f9fc;
+}
+
+.availability-day strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.availability-day span {
+  display: block;
+  margin-top: 5px;
+  color: #3f4d6b;
+  font-size: 0.84rem;
+}
+
+.storage-notice {
+  margin: 18px 0 0;
+  color: #7a8499;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+@media (max-width: 1050px) {
+  .timetable-workspace,
+  .availability-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .image-upload-panel,
+  .course-editor-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .timetable-shell {
+    width: min(100% - 24px, 680px);
+  }
+
+  .editor-heading {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .editor-heading .secondary-button {
+    grid-column: 1 / -1;
+  }
+
+  .save-row,
+  .availability-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .compact-button {
+    width: 100%;
+  }
+
+  .personal-event-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .availability-results {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+  }
+}

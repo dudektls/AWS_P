@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 학습 도구 - 녹음 스크립트 변환</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <p class="eyebrow">AI STUDY TOOL</p>
+        <h1>AI 학습 도구</h1>
+        <p>녹음 파일을 업로드하여 전체 스크립트를 확인하세요.</p>
+      </header>
+
+      <nav class="tool-tabs" aria-label="AI 학습 도구 기능">
+        <a href="/timetable.html">시간표 분석</a>
+        <a class="is-active" href="/" aria-current="page">녹음 변환·요약</a>
+      </nav>
+
+      <section class="workspace" aria-label="녹음 전사 도구">
+        <article class="panel upload-panel">
+          <div class="panel-heading">
+            <span class="step-number">1</span>
+            <div>
+              <h2>녹음 업로드</h2>
+              <p>MP3, WAV, M4A 파일을 선택하세요.</p>
+            </div>
+          </div>
+
+          <label class="drop-zone" id="dropZone" for="audioFile">
+            <input
+              id="audioFile"
+              name="audio"
+              type="file"
+              accept=".mp3,.wav,.m4a,audio/mpeg,audio/wav,audio/mp4,audio/m4a"
+            />
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>파일 선택 또는 드래그 앤 드롭</strong>
+            <span id="uploadHint">지원 형식과 최대 용량을 확인 중입니다.</span>
+          </label>
+
+          <div class="file-card" id="fileCard" hidden>
+            <div>
+              <strong id="fileName"></strong>
+              <span id="fileMeta"></span>
+            </div>
+            <button class="text-button" id="removeFile" type="button">삭제</button>
+          </div>
+
+          <audio id="audioPreview" controls hidden></audio>
+
+          <div class="status" id="statusBox" data-tone="neutral" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="statusText">파일을 선택해 주세요.</span>
+          </div>
+
+          <div class="processing-progress" id="progressPanel" hidden>
+            <div class="progress-heading">
+              <strong id="progressLabel">업로드 준비 중</strong>
+              <span id="progressDetail"></span>
+            </div>
+            <progress id="progressBar" max="100" value="0"></progress>
+          </div>
+
+          <button class="primary-button" id="submitButton" type="button" disabled>
+            스크립트 변환 시작
+          </button>
+        </article>
+
+        <article class="panel result-panel">
+          <div class="panel-heading result-heading">
+            <div class="heading-with-step">
+              <span class="step-number">2</span>
+              <div>
+                <h2>분석 결과</h2>
+                <p>전체 스크립트와 핵심 요약을 확인하세요.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="output-block transcript-block">
+            <div class="output-heading">
+              <h3>전체 스크립트</h3>
+              <div class="output-actions">
+                <button
+                  class="secondary-button expand-button"
+                  type="button"
+                  data-expand-target="transcript"
+                  data-expand-title="전체 스크립트"
+                >
+                  크게 보기
+                </button>
+                <button
+                  class="secondary-button"
+                  id="copyTranscriptButton"
+                  type="button"
+                  disabled
+                >
+                  스크립트 복사
+                </button>
+              </div>
+            </div>
+            <textarea
+              id="transcript"
+              aria-label="전체 스크립트"
+              placeholder="변환된 전체 스크립트가 여기에 표시됩니다."
+              spellcheck="true"
+            ></textarea>
+          </section>
+
+          <section class="output-block summary-block">
+            <div class="output-heading">
+              <h3>요약문</h3>
+              <div class="output-actions">
+                <button
+                  class="secondary-button expand-button"
+                  type="button"
+                  data-expand-target="summary"
+                  data-expand-title="요약문"
+                >
+                  크게 보기
+                </button>
+                <button
+                  class="secondary-button"
+                  id="copySummaryButton"
+                  type="button"
+                  disabled
+                >
+                  요약 복사
+                </button>
+              </div>
+            </div>
+            <textarea
+              id="summary"
+              aria-label="요약문"
+              placeholder="전체 스크립트를 바탕으로 생성한 요약문이 여기에 표시됩니다."
+              spellcheck="true"
+            ></textarea>
+          </section>
+        </article>
+      </section>
+    </main>
+
+    <dialog class="expanded-dialog" id="expandedDialog">
+      <div class="expanded-dialog-content">
+        <div class="expanded-dialog-heading">
+          <h2 id="expandedDialogTitle">큰 화면으로 보기</h2>
+          <button class="dialog-close-button" id="closeExpandedDialog" type="button">
+            닫기
+          </button>
+        </div>
+        <textarea
+          id="expandedText"
+          aria-label="확대된 결과 내용"
+          spellcheck="true"
+        ></textarea>
+      </div>
+    </dialog>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
