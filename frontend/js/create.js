@@ -332,7 +332,7 @@ form.addEventListener("submit", (event) => {
     condition: fields.condition.value.trim(),
   };
   localStorage.setItem(CREATED_STUDIES_KEY, JSON.stringify([...readStudies(), study]));
-  window.location.href = "./index.html?created=1";
+  window.location.href = "./find-group.html?created=1";
 });
 
 updatePreview();

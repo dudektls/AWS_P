@@ -1,0 +1,91 @@
+<!-- 신청 메시지를 작성하여 선택한 스터디에 참여를 신청하는 화면 -->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="선택한 스터디 그룹에 참여 신청" />
+    <title>참여 신청 | 스터디 모집</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/apply-group.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./find-group.html" aria-label="스터디 탐색 홈">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>스터디 모집</span>
+        </a>
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <a href="./find-group.html">스터디 탐색</a>
+          <a href="./create-group.html">스터디 개설</a>
+          <a href="./ai-tools/timetable.html">AI 학습 도구</a>
+          <a href="./statistics.html">모집 통계</a>
+          <a href="./mypage.html">마이페이지</a>
+        </nav>
+        <div class="account-actions">
+          <a class="button button-ghost" href="./mypage.html">내 정보</a>
+          <a class="button button-dark" href="./login.html">로그아웃</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="apply-page">
+      <section class="apply-card" aria-labelledby="apply-title">
+        <div class="apply-heading">
+          <p class="section-kicker">JOIN THIS STUDY</p>
+          <h1 id="apply-title">참여 신청</h1>
+          <p>신청 정보를 확인하고 그룹장에게 전할 메시지를 작성해 주세요.</p>
+        </div>
+
+        <dl class="study-summary">
+          <div class="summary-wide">
+            <dt>스터디명</dt>
+            <dd>데이터베이스 중간고사 복습</dd>
+          </div>
+          <div>
+            <dt>과목</dt>
+            <dd>데이터베이스</dd>
+          </div>
+          <div>
+            <dt>모집 현황</dt>
+            <dd><strong>2 / 4명</strong></dd>
+          </div>
+          <div>
+            <dt>일정</dt>
+            <dd>10월 21일(수) · 14:00–16:00</dd>
+          </div>
+          <div>
+            <dt>장소</dt>
+            <dd>서울 중구 중앙도서관 스터디룸</dd>
+          </div>
+        </dl>
+
+        <form class="apply-form" id="apply-form">
+          <label for="application-message">
+            <span>신청 메시지 <small>선택</small></span>
+            <textarea id="application-message" name="message" maxlength="300" placeholder="그룹장에게 간단한 소개나 참여 의지를 전해 보세요."></textarea>
+          </label>
+          <div class="message-meta">
+            <p>메시지를 작성하지 않아도 신청할 수 있습니다.</p>
+            <span><strong id="message-count">0</strong> / 300</span>
+          </div>
+          <div class="apply-actions">
+            <a class="button button-secondary" href="./group-detail.html">취소</a>
+            <button class="button button-primary" type="submit">참여 신청</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <dialog class="confirm-dialog" id="confirm-dialog">
+      <div class="confirm-content">
+        <span class="confirm-icon" aria-hidden="true">✓</span>
+        <h2>신청이 완료되었습니다</h2>
+        <p>그룹장이 신청 내용을 확인하면 상태가 업데이트됩니다.</p>
+        <a class="button button-primary" href="./applications.html">신청 내역 확인</a>
+      </div>
+    </dialog>
+    <script defer src="./js/apply-group.js"></script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!-- 지도에서 스터디 모임 장소를 검색하고 선택하는 화면 -->
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="스터디 모임 장소 검색 및 지도 선택" />
+    <title>모임 장소 선택 | 스터디 모집</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/select-map.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="./find-group.html" aria-label="스터디 탐색 홈">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span>스터디 모집</span>
+            </a>
+            <nav class="main-nav" aria-label="주요 메뉴">
+                <a href="./find-group.html">스터디 탐색</a>
+                <a class="is-active" href="./create-group.html">스터디 개설</a>
+                <a href="./ai-tools/timetable.html">AI 학습 도구</a>
+                <a href="./statistics.html">모집 통계</a>
+                <a href="./mypage.html">마이페이지</a>
+            </nav>
+            <div class="account-actions">
+                <a class="button button-ghost" href="./mypage.html">내 정보</a>
+                <a class="button button-dark" href="./login.html">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="map-select-main">
+        <section class="map-page-heading" aria-labelledby="map-page-title">
+            <p class="section-kicker">SELECT MEETING PLACE</p>
+            <h1 id="map-page-title">모임 장소 선택</h1>
+            <p>그룹이 모이기 좋은 장소를 검색하고 지도에서 위치를 선택하세요.</p>
+        </section>
+
+        <div class="map-select-grid">
+            <section class="map-panel" aria-label="지도에서 장소 선택">
+                <div class="mock-map" id="meeting-map">
+                    <div class="map-road road-horizontal road-top"></div>
+                    <div class="map-road road-horizontal road-bottom"></div>
+                    <div class="map-road road-vertical road-left"></div>
+                    <div class="map-road road-vertical road-right"></div>
+                    <button class="map-control map-zoom-in" type="button" aria-label="지도 확대">＋</button>
+                    <button class="map-control map-zoom-out" type="button" aria-label="지도 축소">−</button>
+                    <div class="map-marker" aria-label="선택된 위치">
+                        <span></span>
+                        <p>선택한 모임 장소</p>
+                    </div>
+                    <span class="map-provider">지도 API 연결 예정</span>
+                </div>
+            </section>
+
+            <section class="place-panel" aria-labelledby="place-panel-title">
+                <div class="panel-heading">
+                    <p class="section-kicker">PLACE SEARCH</p>
+                    <h2 id="place-panel-title">장소 검색</h2>
+                </div>
+                <form class="place-form">
+                    <label class="place-field" for="place-query">
+                        <span>장소명 또는 주소</span>
+                        <div class="search-control">
+                            <input id="place-query" type="search" placeholder="장소명이나 주소를 입력하세요." />
+                            <button class="button button-secondary" type="button">검색</button>
+                        </div>
+                    </label>
+
+                    <div class="selected-place">
+                        <span>선택한 장소</span>
+                        <strong>중앙도서관 스터디룸</strong>
+                        <small>지도에서 선택한 장소가 표시됩니다.</small>
+                    </div>
+
+                    <label class="place-field" for="place-name">
+                        <span>장소명</span>
+                        <input id="place-name" value="중앙도서관 스터디룸" placeholder="예: 중앙도서관 스터디룸" />
+                    </label>
+                    <label class="place-field" for="place-address">
+                        <span>주소</span>
+                        <input id="place-address" value="서울특별시 중구 세종대로 110" placeholder="지도 선택 후 자동 입력됩니다." />
+                    </label>
+                    <label class="place-field" for="place-detail-address">
+                        <span>상세주소</span>
+                        <input id="place-detail-address" placeholder="층, 호수 또는 스터디룸 번호" />
+                    </label>
+
+                    <div class="place-actions">
+                        <a class="button button-secondary" href="./create-group.html">취소</a>
+                        <button class="button button-primary" type="button">선택 완료</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

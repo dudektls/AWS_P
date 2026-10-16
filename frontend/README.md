@@ -4,7 +4,7 @@
 
 ## 실행
 
-AI API와 저장 가용시간 연동을 포함한 전체 기능은 저장소의 `Tool` 폴더에서 `npm.cmd start`를 실행한 뒤 `http://localhost:3000`에서 확인합니다. 첫 화면은 로그인이고, 스터디 탐색은 `http://localhost:3000/index.html`입니다. `frontend/index.html`을 직접 열면 스터디 탐색 UI만 확인할 수 있습니다.
+AI API와 저장 가용시간 연동을 포함한 전체 기능은 저장소의 `Tool` 폴더에서 `npm.cmd start`를 실행한 뒤 `http://localhost:3000`에서 확인합니다. 첫 화면은 로그인이고, 스터디 탐색은 `http://localhost:3000/find-group.html`입니다. `frontend/find-group.html`을 직접 열면 스터디 탐색 UI만 확인할 수 있습니다.
 
 현재 구현 범위:
 

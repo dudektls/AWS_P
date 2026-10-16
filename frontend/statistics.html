@@ -1,0 +1,64 @@
+<!-- 과목별·요일별 스터디 모집 현황을 확인하는 통계 화면 -->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="현재 모집 중인 스터디의 과목별·요일별 통계" />
+    <title>모집 통계 | 스터디 모집</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/statistics.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./find-group.html" aria-label="스터디 탐색 홈">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>스터디 모집</span>
+        </a>
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <a href="./find-group.html">스터디 탐색</a>
+          <a href="./create-group.html">스터디 개설</a>
+          <a href="./ai-tools/timetable.html">AI 학습 도구</a>
+          <a class="is-active" href="./statistics.html" aria-current="page">모집 통계</a>
+          <a href="./mypage.html">마이페이지</a>
+        </nav>
+        <div class="account-actions">
+          <a class="button button-ghost" href="./mypage.html">내 정보</a>
+          <a class="button button-dark" href="./login.html">로그아웃</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="statistics-main">
+      <section class="statistics-heading" aria-labelledby="statistics-title">
+        <p class="section-kicker">STUDY INSIGHTS</p>
+        <h1 id="statistics-title">모집 통계</h1>
+        <p>현재 모집 중인 스터디를 기준으로 과목과 요일별 현황을 확인하세요.</p>
+      </section>
+
+      <section class="metric-grid" id="metric-grid" aria-label="주요 모집 지표"></section>
+
+      <section class="chart-grid">
+        <article class="chart-card" aria-labelledby="subject-chart-title">
+          <div class="chart-heading">
+            <div><p class="section-kicker">BY SUBJECT</p><h2 id="subject-chart-title">과목별 모집 그룹 수</h2></div>
+            <span>단위: 그룹</span>
+          </div>
+          <div class="bar-chart" id="subject-chart" role="img" aria-label="과목별 모집 그룹 수 막대그래프"></div>
+        </article>
+
+        <article class="chart-card" aria-labelledby="weekday-chart-title">
+          <div class="chart-heading">
+            <div><p class="section-kicker">BY WEEKDAY</p><h2 id="weekday-chart-title">요일별 모집 그룹 수</h2></div>
+            <span>단위: 그룹</span>
+          </div>
+          <div class="bar-chart" id="weekday-chart" role="img" aria-label="요일별 모집 그룹 수 막대그래프"></div>
+        </article>
+      </section>
+
+      <p class="statistics-note">통계는 현재 모집 중인 스터디를 기준으로 집계한 예시 데이터입니다.</p>
+    </main>
+    <script defer src="./js/statistics.js"></script>
+  </body>
+</html>

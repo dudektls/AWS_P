@@ -399,7 +399,9 @@ elements.availability.addEventListener("change", runSearch);
 
 elements.grid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-study-id]");
-  if (button) openStudyDialog(button.dataset.studyId);
+  if (button) {
+    window.location.href = `./group-detail.html?id=${encodeURIComponent(button.dataset.studyId)}`;
+  }
 });
 
 elements.dialog.addEventListener("click", (event) => {

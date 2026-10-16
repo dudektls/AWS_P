@@ -17,7 +17,7 @@ npm.cmd install
 npm.cmd start
 ```
 
-브라우저에서 로그인 화면은 `http://localhost:3000`, 통합 스터디 탐색 화면은 `http://localhost:3000/index.html`, 시간표 분석은 `http://localhost:3000/ai-tools/timetable.html`, 녹음 변환은 `http://localhost:3000/ai-tools/`을 엽니다. 기존 서버가 실행 중이라면 `Ctrl+C`로 종료한 다음 다시 시작해야 변경된 설정이 적용됩니다.
+브라우저에서 로그인 화면은 `http://localhost:3000`, 통합 스터디 탐색 화면은 `http://localhost:3000/find-group.html`, 시간표 분석은 `http://localhost:3000/ai-tools/timetable.html`, 녹음 변환은 `http://localhost:3000/ai-tools/`을 엽니다. 기존 서버가 실행 중이라면 `Ctrl+C`로 종료한 다음 다시 시작해야 변경된 설정이 적용됩니다.
 
 ## `.env` 설정
 

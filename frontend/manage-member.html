@@ -1,0 +1,109 @@
+<!-- 그룹장이 참여 신청자를 확인하고 승인하거나 거절하는 화면 -->
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="스터디 참여 신청자 승인 및 멤버 관리" />
+    <title>그룹장 관리 | 스터디 모집</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/manage-member.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="./find-group.html" aria-label="스터디 탐색 홈">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span>스터디 모집</span>
+            </a>
+            <nav class="main-nav" aria-label="주요 메뉴">
+                <a href="./find-group.html">스터디 탐색</a>
+                <a href="./create-group.html">스터디 개설</a>
+                <a href="./ai-tools/timetable.html">AI 학습 도구</a>
+                <a href="./statistics.html">모집 통계</a>
+                <a class="is-active" href="./manage-member.html" aria-current="page">그룹 관리</a>
+            </nav>
+            <div class="account-actions">
+                <a class="button button-ghost" href="./mypage.html">마이페이지</a>
+                <a class="button button-dark" href="./login.html">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="manage-main">
+        <section class="page-heading" aria-labelledby="manage-title">
+            <div>
+                <p class="section-kicker">LEADER DASHBOARD</p>
+                <h1 id="manage-title">그룹장 관리</h1>
+                <p><strong>데이터베이스 중간고사 복습</strong>의 신청자와 확정 멤버를 관리하세요.</p>
+            </div>
+            <a class="button button-secondary" href="./group-detail.html">그룹 상세 보기</a>
+        </section>
+
+        <section class="summary-grid" aria-label="모집 현황 요약">
+            <article class="summary-card">
+                <span>모집 상태</span>
+                <strong id="recruitment-status">모집 중</strong>
+                <small>정원 충족 시 자동 마감</small>
+            </article>
+            <article class="summary-card">
+                <span>확정 구성원</span>
+                <strong><b id="member-count">2</b> / 4명</strong>
+                <small>그룹장 포함</small>
+            </article>
+            <article class="summary-card">
+                <span>승인 대기</span>
+                <strong><b id="waiting-count">2</b>명</strong>
+                <small>확인이 필요한 신청</small>
+            </article>
+        </section>
+
+        <section class="manage-card" aria-labelledby="applications-title">
+            <div class="card-heading-row">
+                <div>
+                    <p class="section-kicker">APPLICATIONS</p>
+                    <h2 id="applications-title">참여 신청 관리</h2>
+                </div>
+                <div class="filter-buttons" role="group" aria-label="신청 상태 필터">
+                    <button class="filter-button is-active" type="button" data-filter="all">전체</button>
+                    <button class="filter-button" type="button" data-filter="waiting">승인 대기</button>
+                </div>
+            </div>
+            <div class="application-table-wrap">
+                <table class="application-table">
+                    <thead>
+                        <tr>
+                            <th>신청자</th>
+                            <th>프로필 및 신청 메시지</th>
+                            <th>신청일</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="application-list"></tbody>
+                </table>
+                <div class="empty-applications" id="empty-applications" hidden>조건에 해당하는 신청자가 없습니다.</div>
+            </div>
+        </section>
+
+        <section class="manage-card" aria-labelledby="members-title">
+            <div class="card-heading-row">
+                <div>
+                    <p class="section-kicker">MEMBERS</p>
+                    <h2 id="members-title">확정 멤버 관리</h2>
+                </div>
+                <span class="member-capacity"><strong id="capacity-count">2</strong> / 4명</span>
+            </div>
+            <div class="member-list" id="member-list"></div>
+            <div class="member-footer">
+                <p>확정된 멤버는 스터디 참여 인원에 포함됩니다.</p>
+                <button class="button button-secondary" id="close-recruitment" type="button">모집 수동 마감</button>
+            </div>
+        </section>
+    </main>
+    <div class="toast" id="manage-toast" role="status" aria-live="polite" hidden></div>
+    <script defer src="./js/manage-member.js"></script>
+</body>
+
+</html>

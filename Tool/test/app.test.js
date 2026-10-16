@@ -176,14 +176,14 @@ test("정적 웹페이지와 공개 설정을 제공한다", async () => {
     assert.match(pageHtml, /계정 로그인/);
     assert.match(pageHtml, /Google로 로그인/);
 
-    const studyPage = await fetch(`${baseUrl}/index.html`);
+    const studyPage = await fetch(`${baseUrl}/find-group.html`);
     assert.equal(studyPage.status, 200);
     const studyPageHtml = await studyPage.text();
     assert.match(studyPageHtml, /스터디 탐색/);
     assert.match(studyPageHtml, /내 시간에 맞는 스터디를 한눈에 찾아보세요/);
     assert.match(studyPageHtml, /ai-tools\/timetable\.html/);
 
-    const createPage = await fetch(`${baseUrl}/create.html`);
+    const createPage = await fetch(`${baseUrl}/create-group.html`);
     assert.equal(createPage.status, 200);
     const createPageHtml = await createPage.text();
     assert.match(createPageHtml, /스터디 개설/);
@@ -206,7 +206,7 @@ test("정적 웹페이지와 공개 설정을 제공한다", async () => {
     assert.match(recordingPageHtml, /AI 학습 도구/);
     assert.match(recordingPageHtml, /스터디 탐색/);
     assert.match(recordingPageHtml, /스터디 개설/);
-    assert.match(recordingPageHtml, /\/create\.html/);
+    assert.match(recordingPageHtml, /\/create-group\.html/);
     assert.match(recordingPageHtml, /모집 통계/);
     assert.match(recordingPageHtml, /로그인/);
     assert.match(recordingPageHtml, /회원가입/);

@@ -123,7 +123,7 @@ flowchart LR
 ```text
 AWS_P/
 ├─ frontend/
-│  ├─ index.html
+│  ├─ find-group.html
 │  ├─ css/
 │  │  └─ styles.css
 │  ├─ js/
@@ -140,20 +140,20 @@ npm.cmd install
 npm.cmd start
 ```
 
-브라우저에서 `http://localhost:3000`을 열면 로그인 화면이 표시됩니다. 스터디 탐색은 `/index.html`, 녹음 변환·요약은 `/ai-tools/`, 시간표 이미지 분석은 `/ai-tools/timetable.html`에서 제공합니다.
+브라우저에서 `http://localhost:3000`을 열면 로그인 화면이 표시됩니다. 스터디 탐색은 `/find-group.html`, 녹음 변환·요약은 `/ai-tools/`, 시간표 이미지 분석은 `/ai-tools/timetable.html`에서 제공합니다.
 
 시간표 화면에서 `확인 및 저장`을 누르면 계산된 가용시간이 같은 브라우저의 localStorage에 저장됩니다. 메인 탐색 화면의 `저장된 가용시간 적용` 필터는 이 데이터를 읽어 일정 전체가 가용시간 안에 포함되는 스터디만 표시합니다.
 
 ## 개발 현황
 
-- [x] 프로젝트 요구사항 및 화면 흐름 설계
-- [x] 스터디 탐색 화면 초안
-- [ ] 회원가입·로그인·마이페이지
+- [o] 프로젝트 요구사항 및 화면 흐름 설계
+- [o] 스터디 탐색 화면 초안
+- [o] 회원가입·로그인·마이페이지
 - [ ] 스터디 상세·개설 화면
 - [ ] 참여 신청·그룹장 관리 화면
 - [ ] Node.js API 및 MySQL 연결
-- [ ] 지도 기반 장소 선택
-- [x] AI 시간표 분석 및 녹음 요약
+- [o] 지도 기반 장소 선택
+- [o] AI 시간표 분석 및 녹음 요약
 - [ ] 모집 통계 및 Google Analytics
 - [ ] Python MCP 서버 연동
 - [ ] 통합 테스트, 보안 점검, AWS EC2 배포
