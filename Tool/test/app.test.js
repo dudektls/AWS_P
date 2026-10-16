@@ -43,7 +43,12 @@ function createSilentWav(durationSeconds = 0.1) {
 async function withServer(transcriptionService, callback, options = {}) {
   const uploadDirectory = await fs.mkdtemp(path.join(os.tmpdir(), "transcribe-test-"));
   const app = await createApp({
-    config: { uploadDirectory, maxUploadMb: 1, ...options.config },
+    config: {
+      uploadDirectory,
+      maxUploadMb: 1,
+      kakaoMapJavaScriptKey: "",
+      ...options.config,
+    },
     transcriptionService,
     summaryService: options.summaryService ?? {
       summarize: async () => "핵심 내용을 정리한 요약입니다.",
@@ -168,14 +173,54 @@ test("정적 웹페이지와 공개 설정을 제공한다", async () => {
     const page = await fetch(baseUrl);
     assert.equal(page.status, 200);
     const pageHtml = await page.text();
-    assert.match(pageHtml, /AI 학습 도구/);
-    assert.match(pageHtml, /data-expand-target="transcript"/);
-    assert.match(pageHtml, /data-expand-target="summary"/);
-    assert.match(pageHtml, /id="expandedDialog"/);
+    assert.match(pageHtml, /계정 로그인/);
+    assert.match(pageHtml, /Google로 로그인/);
 
-    const timetablePage = await fetch(`${baseUrl}/timetable.html`);
+    const studyPage = await fetch(`${baseUrl}/index.html`);
+    assert.equal(studyPage.status, 200);
+    const studyPageHtml = await studyPage.text();
+    assert.match(studyPageHtml, /스터디 탐색/);
+    assert.match(studyPageHtml, /내 시간에 맞는 스터디를 한눈에 찾아보세요/);
+    assert.match(studyPageHtml, /ai-tools\/timetable\.html/);
+
+    const createPage = await fetch(`${baseUrl}/create.html`);
+    assert.equal(createPage.status, 200);
+    const createPageHtml = await createPage.text();
+    assert.match(createPageHtml, /스터디 개설/);
+    assert.match(createPageHtml, /id="create-study-form"/);
+    assert.match(createPageHtml, /id="study-map"/);
+    assert.match(createPageHtml, /id="study-address"/);
+    assert.match(createPageHtml, /id="study-detail-address"/);
+    assert.match(createPageHtml, /id="study-place-name"/);
+    assert.match(createPageHtml, /data-example-target="study-goal"/);
+    assert.match(createPageHtml, /data-example-target="study-condition"/);
+    assert.doesNotMatch(createPageHtml, /name="kakao-map-app-key"/);
+
+    const createScript = await fetch(`${baseUrl}/js/create.js`);
+    assert.equal(createScript.status, 200);
+    assert.match(await createScript.text(), /geocoder\.addressSearch/);
+
+    const recordingPage = await fetch(`${baseUrl}/ai-tools/`);
+    assert.equal(recordingPage.status, 200);
+    const recordingPageHtml = await recordingPage.text();
+    assert.match(recordingPageHtml, /AI 학습 도구/);
+    assert.match(recordingPageHtml, /스터디 탐색/);
+    assert.match(recordingPageHtml, /스터디 개설/);
+    assert.match(recordingPageHtml, /\/create\.html/);
+    assert.match(recordingPageHtml, /모집 통계/);
+    assert.match(recordingPageHtml, /로그인/);
+    assert.match(recordingPageHtml, /회원가입/);
+    assert.match(recordingPageHtml, /data-expand-target="transcript"/);
+    assert.match(recordingPageHtml, /data-expand-target="summary"/);
+    assert.match(recordingPageHtml, /id="expandedDialog"/);
+
+    const timetablePage = await fetch(`${baseUrl}/ai-tools/timetable.html`);
     assert.equal(timetablePage.status, 200);
-    assert.match(await timetablePage.text(), /AI 시간표 분석 시작/);
+    const timetablePageHtml = await timetablePage.text();
+    assert.match(timetablePageHtml, /AI 시간표 분석 시작/);
+    assert.match(timetablePageHtml, /스터디 탐색/);
+    assert.match(timetablePageHtml, /스터디 개설/);
+    assert.match(timetablePageHtml, /모집 통계/);
 
     const configResponse = await fetch(`${baseUrl}/api/config`);
     assert.deepEqual(await configResponse.json(), {
@@ -187,6 +232,7 @@ test("정적 웹페이지와 공개 설정을 제공한다", async () => {
       supportedImageExtensions: ["png", "jpg", "jpeg"],
       timetableStartHour: 8,
       timetableEndHour: 22,
+      kakaoMapJavaScriptKey: "",
     });
   });
 });

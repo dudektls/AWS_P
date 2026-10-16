@@ -85,11 +85,40 @@ const studies = [
   },
 ];
 
-const savedAvailability = {
-  3: [{ start: "13:00", end: "18:00" }],
-  4: [{ start: "09:30", end: "13:00" }],
-  5: [{ start: "13:00", end: "18:00" }],
+const CREATED_STUDIES_KEY = "study-recruit.created-studies.v1";
+
+function loadCreatedStudies(storage = localStorage) {
+  try {
+    const value = JSON.parse(storage.getItem(CREATED_STUDIES_KEY));
+    if (!Array.isArray(value)) return [];
+    return value.filter(
+      (study) =>
+        Number.isFinite(study?.id) &&
+        typeof study.title === "string" &&
+        typeof study.subject === "string" &&
+        typeof study.date === "string" &&
+        typeof study.startTime === "string" &&
+        typeof study.endTime === "string",
+    );
+  } catch {
+    return [];
+  }
+}
+
+studies.push(...loadCreatedStudies());
+
+const TIMETABLE_STORAGE_KEY = "ai-study-tool.confirmed-timetable.v1";
+const DAY_INDEX = {
+  SUN: 0,
+  MON: 1,
+  TUE: 2,
+  WED: 3,
+  THU: 4,
+  FRI: 5,
+  SAT: 6,
 };
+
+let savedAvailability = loadSavedAvailability();
 
 const elements = {
   form: document.querySelector("#search-form"),
@@ -99,6 +128,7 @@ const elements = {
   start: document.querySelector("#start-filter"),
   end: document.querySelector("#end-filter"),
   availability: document.querySelector("#availability-filter"),
+  availabilityHint: document.querySelector("#availability-hint"),
   grid: document.querySelector("#study-grid"),
   resultCount: document.querySelector("#result-count"),
   heroCount: document.querySelector("#hero-count"),
@@ -145,6 +175,51 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function formatStudyLocation(study) {
+  const placeName = String(study.placeName || "").trim();
+  const address = String(study.address || "").trim();
+  const detailAddress = String(study.detailAddress || "").trim();
+  const primaryLocation = placeName && address ? `${placeName}(${address})` : placeName || address;
+  return [primaryLocation, detailAddress].filter(Boolean).join(", ") || study.location;
+}
+
+function loadSavedAvailability(storage = localStorage) {
+  try {
+    const saved = JSON.parse(storage.getItem(TIMETABLE_STORAGE_KEY));
+    const slots = saved?.matchingData?.availableSlots;
+    if (saved?.version !== 1 || !Array.isArray(slots)) return {};
+
+    return slots.reduce((availability, slot) => {
+      const weekday = DAY_INDEX[slot?.day];
+      if (
+        weekday === undefined ||
+        typeof slot.startTime !== "string" ||
+        typeof slot.endTime !== "string"
+      ) {
+        return availability;
+      }
+      availability[weekday] ??= [];
+      availability[weekday].push({ start: slot.startTime, end: slot.endTime });
+      return availability;
+    }, {});
+  } catch {
+    return {};
+  }
+}
+
+function refreshAvailabilityControl() {
+  savedAvailability = loadSavedAvailability();
+  const slotCount = Object.values(savedAvailability).reduce(
+    (total, slots) => total + slots.length,
+    0,
+  );
+  elements.availability.disabled = slotCount === 0;
+  if (slotCount === 0) elements.availability.checked = false;
+  elements.availabilityHint.textContent = slotCount
+    ? `AI 시간표에서 계산한 가용시간 ${slotCount}개를 적용합니다.`
+    : "AI 시간표에서 시간표를 저장하면 사용할 수 있습니다.";
 }
 
 function populateSubjects() {
@@ -201,7 +276,7 @@ function studyCard(study) {
       </div>
       <div class="study-meta">
         <div class="meta-item"><span class="meta-icon" aria-hidden="true">◷</span><span>${formatDate(study.date)} · ${study.startTime}–${study.endTime}</span></div>
-        <div class="meta-item"><span class="meta-icon" aria-hidden="true">⌖</span><span>${escapeHtml(study.location)}</span></div>
+        <div class="meta-item"><span class="meta-icon" aria-hidden="true">⌖</span><span>${escapeHtml(formatStudyLocation(study))}</span></div>
       </div>
       <div class="card-footer">
         <div class="capacity-info">
@@ -287,7 +362,7 @@ function openStudyDialog(studyId) {
     <p class="dialog-goal">${escapeHtml(study.goal)}</p>
     <dl class="dialog-detail-list">
       <div><dt>일정</dt><dd>${formatDate(study.date)} ${study.startTime}–${study.endTime}</dd></div>
-      <div><dt>장소</dt><dd>${escapeHtml(study.location)}</dd></div>
+      <div><dt>장소</dt><dd>${escapeHtml(formatStudyLocation(study))}</dd></div>
       <div><dt>모집 현황</dt><dd>${study.currentMembers} / ${study.capacity}명</dd></div>
       <div><dt>참여 조건</dt><dd>${escapeHtml(study.condition)}</dd></div>
       <div><dt>그룹장</dt><dd>${escapeHtml(study.leader)}</dd></div>
@@ -342,7 +417,19 @@ elements.dialog.addEventListener("click", (event) => {
 elements.dialogClose.addEventListener("click", () => elements.dialog.close());
 elements.gridViewButton.addEventListener("click", () => setViewMode("grid"));
 elements.listViewButton.addEventListener("click", () => setViewMode("list"));
+window.addEventListener("storage", (event) => {
+  if (event.key !== TIMETABLE_STORAGE_KEY) return;
+  refreshAvailabilityControl();
+  runSearch();
+});
 
 populateSubjects();
+refreshAvailabilityControl();
 setViewMode(getSavedViewMode(), false);
 renderStudies(studies);
+
+const pageParameters = new URLSearchParams(window.location.search);
+if (pageParameters.get("created") === "1") {
+  showToast("스터디를 개설하고 탐색 목록에 추가했습니다.");
+  window.history.replaceState({}, "", window.location.pathname);
+}

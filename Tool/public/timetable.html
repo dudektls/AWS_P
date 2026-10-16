@@ -4,10 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI 학습 도구 - 시간표 이미지 분석</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/timetable.css" />
+    <link rel="stylesheet" href="/ai-tools/styles.css" />
+    <link rel="stylesheet" href="/ai-tools/timetable.css" />
   </head>
   <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="스터디 모집 홈">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>스터디 모집</span>
+        </a>
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <a href="/index.html">스터디 탐색</a>
+          <a href="/create.html">스터디 개설</a>
+          <a class="is-active" href="/ai-tools/timetable.html" aria-current="page">AI 학습 도구</a>
+          <a href="/index.html#stats">모집 통계</a>
+        </nav>
+        <div class="account-actions">
+          <a class="header-button header-button-ghost" href="/login.html">로그인</a>
+          <a class="header-button header-button-dark" href="/signup.html">회원가입</a>
+        </div>
+      </div>
+    </header>
     <main class="page-shell timetable-shell">
       <header class="page-header">
         <p class="eyebrow">AI STUDY TOOL</p>
@@ -16,8 +34,8 @@
       </header>
 
       <nav class="tool-tabs" aria-label="AI 학습 도구 기능">
-        <a class="is-active" href="/timetable.html" aria-current="page">시간표 분석</a>
-        <a href="/">녹음 변환·요약</a>
+        <a class="is-active" href="/ai-tools/timetable.html" aria-current="page">시간표 분석</a>
+        <a href="/ai-tools/">녹음 변환·요약</a>
       </nav>
 
       <section class="timetable-workspace">
@@ -162,6 +180,6 @@
       </p>
     </main>
 
-    <script type="module" src="/timetable.js"></script>
+    <script type="module" src="/ai-tools/timetable.js"></script>
   </body>
 </html>

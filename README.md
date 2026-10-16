@@ -132,14 +132,17 @@ AWS_P/
 └─ README.md
 ```
 
-## 프론트엔드 실행
+## 실행
 
-```bash
-git clone https://github.com/dudektls/AWS_P.git
-cd AWS_P
+```powershell
+cd Tool
+npm.cmd install
+npm.cmd start
 ```
 
-`frontend/index.html`을 브라우저에서 열거나 IDE의 Live Server로 실행합니다. 현재 프론트엔드는 목 데이터를 사용하며, 백엔드 구현 후 데이터 접근 부분을 실제 API 호출로 교체할 예정입니다.
+브라우저에서 `http://localhost:3000`을 열면 로그인 화면이 표시됩니다. 스터디 탐색은 `/index.html`, 녹음 변환·요약은 `/ai-tools/`, 시간표 이미지 분석은 `/ai-tools/timetable.html`에서 제공합니다.
+
+시간표 화면에서 `확인 및 저장`을 누르면 계산된 가용시간이 같은 브라우저의 localStorage에 저장됩니다. 메인 탐색 화면의 `저장된 가용시간 적용` 필터는 이 데이터를 읽어 일정 전체가 가용시간 안에 포함되는 스터디만 표시합니다.
 
 ## 개발 현황
 
@@ -150,7 +153,7 @@ cd AWS_P
 - [ ] 참여 신청·그룹장 관리 화면
 - [ ] Node.js API 및 MySQL 연결
 - [ ] 지도 기반 장소 선택
-- [ ] AI 시간표 분석 및 녹음 요약
+- [x] AI 시간표 분석 및 녹음 요약
 - [ ] 모집 통계 및 Google Analytics
 - [ ] Python MCP 서버 연동
 - [ ] 통합 테스트, 보안 점검, AWS EC2 배포
