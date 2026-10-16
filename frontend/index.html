@@ -19,8 +19,8 @@
 
         <nav class="main-nav" aria-label="주요 메뉴">
           <a class="is-active" href="#study-list">스터디 탐색</a>
-          <a href="#create">스터디 개설</a>
-          <a href="#tools">AI 학습 도구</a>
+          <a href="./create.html">스터디 개설</a>
+          <a href="./ai-tools/timetable.html">AI 학습 도구</a>
           <a href="#stats">모집 통계</a>
         </nav>
 
@@ -35,10 +35,9 @@
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-content">
           <p class="eyebrow">AVAILABLE TIME · OFFLINE STUDY</p>
-          <h1 id="page-title">내 시간에 맞는 스터디를<br />한눈에 찾아보세요.</h1>
+          <h1 id="page-title">스터디 탐색</h1>
           <p class="hero-description">
-            과목과 날짜, 참여 가능한 시간을 입력하면 조건에 맞는 오프라인
-            스터디만 모아 보여드립니다.
+            내 시간에 맞는 스터디를 한눈에 찾아보세요.
           </p>
         </div>
         <div class="hero-stat" aria-label="현재 모집 현황">
@@ -100,9 +99,10 @@
               <span class="toggle-track" aria-hidden="true"></span>
               <span>
                 <strong>저장된 가용시간 적용</strong>
-                <small>마이페이지에 저장한 시간과 완전히 겹치는 스터디만 표시</small>
+                <small id="availability-hint">저장된 시간표를 확인하고 있습니다.</small>
               </span>
             </label>
+            <a class="availability-link" href="./ai-tools/timetable.html">시간표 등록·수정</a>
             <button class="button button-primary search-button" type="submit">
               스터디 검색
             </button>

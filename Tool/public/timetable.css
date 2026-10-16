@@ -1,9 +1,11 @@
 .timetable-shell {
-  width: min(1440px, calc(100% - 40px));
+  width: 100%;
 }
 
 .timetable-workspace {
   display: grid;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
   grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.48fr);
   gap: 22px;
   align-items: start;
@@ -195,7 +197,10 @@
 
 .timetable-panel,
 .availability-panel {
+  width: min(1180px, calc(100% - 40px));
   margin-top: 22px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .visual-timetable {
@@ -391,7 +396,10 @@
 }
 
 .storage-notice {
+  width: min(1180px, calc(100% - 40px));
   margin: 18px 0 0;
+  margin-right: auto;
+  margin-left: auto;
   color: #7a8499;
   font-size: 0.82rem;
   text-align: center;
@@ -411,7 +419,14 @@
 
 @media (max-width: 700px) {
   .timetable-shell {
-    width: min(100% - 24px, 680px);
+    width: 100%;
+  }
+
+  .timetable-workspace,
+  .timetable-panel,
+  .availability-panel,
+  .storage-notice {
+    width: min(100% - 28px, 680px);
   }
 
   .editor-heading {
@@ -445,4 +460,85 @@
     grid-template-columns: 1fr 1fr;
     text-align: center;
   }
+}
+
+.image-file-card,
+.course-table-wrap,
+.study-window-row,
+.personal-event-row,
+.availability-day {
+  border-color: var(--line);
+}
+
+.image-file-meta span,
+.save-row p,
+.storage-notice {
+  color: var(--muted);
+}
+
+.image-preview,
+.course-table th,
+.empty-state,
+.study-window-row,
+.personal-event-row,
+.availability-day {
+  background: #fbf8f4;
+}
+
+.image-preview,
+.course-table input,
+.course-table select,
+.availability-panel input,
+.availability-panel select,
+.small-button {
+  border-color: #cdb8a4;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.course-table th {
+  color: var(--muted);
+}
+
+.course-table th,
+.course-table td,
+.time-corner,
+.day-header,
+.time-column,
+.day-column {
+  border-color: var(--line);
+}
+
+.time-corner,
+.day-header {
+  background: var(--surface-soft);
+}
+
+.time-column,
+.day-column {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--hour-height) - 1px),
+    #e8ddd2 calc(var(--hour-height) - 1px),
+    #e8ddd2 var(--hour-height)
+  );
+}
+
+.time-label {
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.course-event {
+  color: var(--ink);
+  box-shadow: 0 3px 9px rgb(73 50 33 / 12%);
+}
+
+#availabilityMessage {
+  color: var(--primary);
+}
+
+.availability-day span {
+  color: var(--muted);
 }

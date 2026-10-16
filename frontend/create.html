@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="새로운 오프라인 스터디 개설" />
+  <title>스터디 개설 | 스터디 모집</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/create.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html" aria-label="스터디 탐색 홈">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>스터디 모집</span>
+      </a>
+      <nav class="main-nav" aria-label="주요 메뉴">
+        <a href="./index.html">스터디 탐색</a>
+        <a class="is-active" href="./create.html" aria-current="page">스터디 개설</a>
+        <a href="./ai-tools/timetable.html">AI 학습 도구</a>
+        <a href="./index.html#stats">모집 통계</a>
+      </nav>
+      <div class="account-actions">
+        <a class="button button-ghost" href="./login.html">로그인</a>
+        <a class="button button-dark" href="./signup.html">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero create-hero" aria-labelledby="create-page-title">
+      <div class="hero-content">
+        <p class="eyebrow">CREATE YOUR STUDY</p>
+        <h1 id="create-page-title">스터디 개설</h1>
+        <p class="hero-description">함께 달성할 목표와 일정을 정하고 새로운 스터디를 시작해 보세요.</p>
+      </div>
+    </section>
+
+    <section class="create-section">
+      <form class="create-form" id="create-study-form" novalidate>
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span>1</span>
+            <div>
+              <h2>기본 정보</h2>
+              <p>참여자가 스터디를 쉽게 이해할 수 있도록 작성해 주세요.</p>
+            </div>
+          </div>
+          <div class="create-grid two-columns">
+            <label class="create-field"><span>스터디명 <b>*</b></span><input id="study-title" name="title" maxlength="40"
+                required placeholder="예: 데이터베이스 중간고사 복습" /></label>
+            <label class="create-field"><span>과목 <b>*</b></span><input id="study-subject" name="subject" maxlength="20"
+                required placeholder="예: 데이터베이스" /></label>
+            <div class="create-field full-width">
+              <label for="study-goal">학습 목표 <b>*</b></label>
+              <textarea id="study-goal" name="goal" maxlength="300" required
+                placeholder="함께 공부할 내용과 달성할 목표를 입력하세요."></textarea>
+              <div class="example-picker" aria-labelledby="goal-example-title">
+                <p id="goal-example-title">맞춤 예시 선택 <span>과목명이 자동으로 반영됩니다.</span></p>
+                <div class="example-options">
+                  <button type="button" data-example-target="study-goal"
+                    data-example-template="{subject} 핵심 개념을 정리하고 주요 문제를 함께 풀이합니다."
+                    aria-pressed="false">핵심 개념 정리와 문제풀이</button>
+                  <button type="button" data-example-target="study-goal"
+                    data-example-template="{subject} 시험 범위를 함께 복습하고 개인별 오답을 정리합니다."
+                    aria-pressed="false">시험 범위 복습과 오답 정리</button>
+                  <button type="button" data-example-target="study-goal"
+                    data-example-template="매주 정한 분량을 학습하고 서로 설명하며 이해도를 점검합니다."
+                    aria-pressed="false">주간 학습과 상호 설명</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span>2</span>
+            <div>
+              <h2>일정과 장소</h2>
+              <p>오프라인 모임의 날짜, 시간과 장소를 입력해 주세요.</p>
+            </div>
+          </div>
+          <div class="create-grid schedule-columns">
+            <label class="create-field"><span>날짜 <b>*</b></span><input id="study-date" name="date" type="date"
+                required /></label>
+            <label class="create-field"><span>시작 시간 <b>*</b></span><input id="study-start" name="startTime" type="time"
+                required /></label>
+            <label class="create-field"><span>종료 시간 <b>*</b></span><input id="study-end" name="endTime" type="time"
+                required /></label>
+            <label class="create-field"><span>정원 <b>*</b></span><input id="study-capacity" name="capacity" type="number"
+                min="2" max="20" value="4" required /></label>
+            <div class="location-picker full-width">
+              <div class="location-picker-heading">
+                <div>
+                  <h3>모임 장소 <b>*</b></h3>
+                  <p>장소를 검색하거나 지도를 클릭하면 주소가 자동으로 입력됩니다.</p>
+                </div>
+                <span class="map-help">주소를 직접 입력해도 지도 위치가 자동으로 갱신됩니다.</span>
+              </div>
+              <div class="map-search-row">
+                <label class="map-search-field" for="map-search-query">
+                  <span class="sr-only">장소 검색</span>
+                  <input id="map-search-query" type="search" placeholder="장소명 또는 주소를 검색하세요." autocomplete="off" />
+                </label>
+                <button class="button button-secondary" id="map-search-button" type="button">장소 검색</button>
+              </div>
+              <div class="map-search-results" id="map-search-results" aria-live="polite" hidden></div>
+              <div class="study-map" id="study-map" role="application" aria-label="모임 장소 선택 지도">
+                <p>지도 API를 불러오는 중입니다.</p>
+              </div>
+              <p class="map-status" id="map-status" aria-live="polite"></p>
+              <div class="address-grid">
+                <label class="create-field">
+                  <span>장소명/건물명 <b>*</b></span>
+                  <input id="study-place-name" name="placeName" maxlength="60" required
+                    placeholder="예: 동의대학교" />
+                </label>
+                <label class="create-field">
+                  <span>주소 <b>*</b></span>
+                  <input id="study-address" name="address" maxlength="120" required
+                    placeholder="지도에서 선택하거나 주소를 직접 입력하세요." />
+                </label>
+                <label class="create-field">
+                  <span>상세주소</span>
+                  <input id="study-detail-address" name="detailAddress" maxlength="80"
+                    placeholder="건물, 층, 스터디룸 번호 등" />
+                </label>
+              </div>
+              <input id="study-latitude" name="latitude" type="hidden" />
+              <input id="study-longitude" name="longitude" type="hidden" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span>3</span>
+            <div>
+              <h2>참여 조건</h2>
+              <p>신청자가 미리 알아야 할 조건이나 준비사항을 적어주세요.</p>
+            </div>
+          </div>
+          <div class="create-field">
+            <label for="study-condition">참여 조건 <b>*</b></label>
+            <textarea id="study-condition" name="condition" maxlength="200" required
+              placeholder="예: 기본 SQL 문법을 학습한 학생"></textarea>
+            <div class="example-picker" aria-labelledby="condition-example-title">
+              <p id="condition-example-title">맞춤 예시 선택 <span>선택 후 자유롭게 수정할 수 있습니다.</span></p>
+              <div class="example-options">
+                <button type="button" data-example-target="study-condition"
+                  data-example-template="{subject} 기초 개념을 학습한 분" aria-pressed="false">기초 개념 학습자</button>
+                <button type="button" data-example-target="study-condition"
+                  data-example-template="정해진 일정에 빠짐없이 참여할 수 있는 분" aria-pressed="false">일정 참여 가능자</button>
+                <button type="button" data-example-target="study-condition"
+                  data-example-template="매주 맡은 학습 분량과 문제풀이를 준비할 수 있는 분"
+                  aria-pressed="false">학습 분량 준비 가능자</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="form-message" id="create-form-message" role="alert" aria-live="polite"></p>
+        <div class="create-actions">
+          <a class="button button-secondary" href="./index.html">취소</a>
+          <button class="button button-primary" type="submit">스터디 개설</button>
+        </div>
+      </form>
+
+      <aside class="create-preview" aria-labelledby="preview-title">
+        <p class="section-kicker">미리보기</p>
+        <h2 id="preview-title">스터디 정보를 입력해 주세요</h2>
+        <p id="preview-goal">입력한 내용이 탐색 카드에 어떻게 표시되는지 확인할 수 있습니다.</p>
+        <dl>
+          <div>
+            <dt>과목</dt>
+            <dd id="preview-subject">입력 전</dd>
+          </div>
+          <div>
+            <dt>일정</dt>
+            <dd id="preview-schedule">입력 전</dd>
+          </div>
+          <div>
+            <dt>장소</dt>
+            <dd id="preview-location">입력 전</dd>
+          </div>
+          <div>
+            <dt>정원</dt>
+            <dd id="preview-capacity">4명</dd>
+          </div>
+        </dl>
+        <div class="preview-notice">개설한 스터디는 이 브라우저에 저장되고 탐색 화면에 바로 추가됩니다.</div>
+      </aside>
+    </section>
+  </main>
+  <script defer src="./js/create.js"></script>
+</body>
+
+</html>

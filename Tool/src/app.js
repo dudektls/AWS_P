@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import express from "express";
 import multer from "multer";
 import { parseFile } from "music-metadata";
@@ -17,6 +18,10 @@ import { GeminiSummaryService } from "./services/summaryService.js";
 import { RecordingAnalysisService } from "./services/recordingAnalysisService.js";
 import { GeminiTimetableImageService } from "./services/timetableImageService.js";
 import { validateImageFile } from "./services/imageValidationService.js";
+
+const sourceDirectory = path.dirname(fileURLToPath(import.meta.url));
+const frontendDirectory = path.resolve(sourceDirectory, "../../frontend");
+const aiToolsDirectory = path.resolve(sourceDirectory, "../public");
 
 async function removeTemporaryFile(filePath) {
   if (!filePath) return;
@@ -77,7 +82,11 @@ export async function createApp(options = {}) {
   const app = express();
 
   app.disable("x-powered-by");
-  app.use(express.static(path.resolve("public")));
+  app.get("/", (_request, response) => {
+    response.sendFile(path.join(frontendDirectory, "login.html"));
+  });
+  app.use(express.static(frontendDirectory));
+  app.use("/ai-tools", express.static(aiToolsDirectory));
 
   app.get("/api/config", (_request, response) => {
     response.json({
@@ -89,6 +98,7 @@ export async function createApp(options = {}) {
       supportedImageExtensions: ["png", "jpg", "jpeg"],
       timetableStartHour: appConfig.timetableStartHour,
       timetableEndHour: appConfig.timetableEndHour,
+      kakaoMapJavaScriptKey: appConfig.kakaoMapJavaScriptKey ?? "",
     });
   });
 

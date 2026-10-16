@@ -18,6 +18,8 @@ function readPositiveNumber(name, fallback, maximum = Number.POSITIVE_INFINITY) 
 export const config = Object.freeze({
   port: readPositiveNumber("PORT", 3000),
   geminiApiKey: process.env.GEMINI_API_KEY?.trim() ?? "",
+  kakaoMapJavaScriptKey:
+    process.env.KAKAO_MAP_JAVASCRIPT_KEY?.trim() ?? "",
   maxUploadMb: readPositiveNumber("MAX_UPLOAD_MB", 500),
   maxImageUploadMb: readPositiveNumber("MAX_IMAGE_UPLOAD_MB", 10, 20),
   maxAudioDurationMinutes: readPositiveNumber(

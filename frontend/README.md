@@ -4,7 +4,7 @@
 
 ## 실행
 
-`frontend/index.html`을 브라우저에서 열거나 VS Code/Antigravity의 Live Server로 실행합니다.
+AI API와 저장 가용시간 연동을 포함한 전체 기능은 저장소의 `Tool` 폴더에서 `npm.cmd start`를 실행한 뒤 `http://localhost:3000`에서 확인합니다. 첫 화면은 로그인이고, 스터디 탐색은 `http://localhost:3000/index.html`입니다. `frontend/index.html`을 직접 열면 스터디 탐색 UI만 확인할 수 있습니다.
 
 현재 구현 범위:
 
@@ -14,6 +14,13 @@
 - 검색 결과·빈 결과 상태
 - 카드형·한 줄 목록형 보기 전환 및 선택 상태 저장
 - 스터디 상세 다이얼로그
+- AI 시간표에서 저장한 가용시간 기반 필터
+- AI 시간표 분석 및 녹음 변환·요약 화면 연결
+- 스터디 개설 폼의 카카오맵 장소 검색·지도 클릭·주소 자동 입력
 - 추후 API 연결을 고려한 데이터와 렌더링 로직 분리
 
 시간 검색은 스터디 시작·종료 시간이 사용자가 지정한 가능 시간 안에 완전히 포함될 때만 결과에 포함합니다.
+
+## 카카오맵 설정
+
+`Tool/.env`의 `KAKAO_MAP_JAVASCRIPT_KEY`에 카카오 Developers의 JavaScript 키를 입력하고, 실행 주소(기본값 `http://localhost:3000`)를 JavaScript SDK 사이트 도메인으로 등록합니다. `.env`는 Git에서 제외되며, 키가 비어 있거나 지도를 불러오지 못해도 주소와 상세주소는 직접 입력할 수 있습니다.

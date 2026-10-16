@@ -17,7 +17,7 @@ npm.cmd install
 npm.cmd start
 ```
 
-브라우저에서 시간표 분석은 `http://localhost:3000/timetable.html`, 녹음 변환은 `http://localhost:3000`을 엽니다. 기존 서버가 실행 중이라면 `Ctrl+C`로 종료한 다음 다시 시작해야 변경된 설정이 적용됩니다.
+브라우저에서 로그인 화면은 `http://localhost:3000`, 통합 스터디 탐색 화면은 `http://localhost:3000/index.html`, 시간표 분석은 `http://localhost:3000/ai-tools/timetable.html`, 녹음 변환은 `http://localhost:3000/ai-tools/`을 엽니다. 기존 서버가 실행 중이라면 `Ctrl+C`로 종료한 다음 다시 시작해야 변경된 설정이 적용됩니다.
 
 ## `.env` 설정
 
@@ -84,7 +84,8 @@ TIMETABLE_END_HOUR=22
 - `src/services/timetableImageService.js`: 이미지 입력, Gemini Interactions API, JSON Schema 요청과 오류 구분을 담당합니다.
 - `src/services/timetableValidationService.js`: AI 결과의 요일·시간·중복·충돌을 런타임에 검증합니다.
 - `src/services/imageValidationService.js`: PNG/JPEG 파일 구조와 이미지 크기를 검증합니다.
-- `public/index.html`: 업로드, 전체 스크립트, 요약문 화면 구조입니다.
+- `../frontend`: 서버 루트에서 제공하는 스터디 탐색·로그인·회원가입 화면입니다.
+- `public/index.html`: `/ai-tools/`에서 제공하는 업로드, 전체 스크립트, 요약문 화면 구조입니다.
 - `public/app.js`: 드래그 앤 드롭, 미리듣기, 중복 제출 방지, 두 결과 출력과 복사를 처리합니다.
 - `public/timetable.html`, `public/timetable.js`, `public/timetable.css`: 시간표 업로드, 편집, 시각화와 반응형 화면입니다.
 - `public/availability.js`: 시간 구간 병합과 차집합으로 가용시간을 계산합니다.
@@ -139,6 +140,6 @@ npm.cmd test
 - 시간표 확정본은 현재 브라우저의 localStorage에만 저장됩니다. 다른 브라우저·기기와 동기화되지 않으며 로그인/MySQL 연동 시 `timetableStorage.js`를 서버 API 구현으로 교체해야 합니다.
 - 교시만 있고 실제 시각 정보가 없는 이미지는 학교별 교시표 없이는 자동 확정할 수 없어 `검토 필요`로 표시합니다.
 - 토·일 데이터는 내부 구조와 편집 목록에서 지원하지만 현재 시각화와 가용시간 화면은 월~금 중심입니다.
-- 실제 스터디 검색·매칭, 로그인, MySQL, DOCX, AWS 배포, MCP는 포함하지 않습니다.
+- 스터디 검색 화면은 목 데이터를 사용하며, 로그인, MySQL, DOCX, AWS 배포, MCP는 포함하지 않습니다.
 
 공식 문서: [Image understanding](https://ai.google.dev/gemini-api/docs/image-understanding), [Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output), [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash), [Audio transcription](https://ai.google.dev/gemini-api/docs/transcribe), [API 키](https://ai.google.dev/gemini-api/docs/api-key)
